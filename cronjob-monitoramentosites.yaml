@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-monitor-sites
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: monitor-sites
+            image: renatogroffe/job-monitor-sites-3-0
+            env:
+            - name: BaseMonitoramento
+              value: STRING_CONEXAO
+          restartPolicy: OnFailure
